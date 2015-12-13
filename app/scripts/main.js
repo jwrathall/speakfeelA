@@ -15,6 +15,29 @@ $(document).ready(function () {
 		});
 	}
 	
+	function SetIPData(json){
+		currentIP = json.ip;
+		if( currentIP !== 'undefined' ){
+			GetGeoData(currentIP);
+		}else{
+			$('#address').html("Error fetching your IP");
+			$('#current').hide();
+			$('#daily').hide();	
+		}
+	}
+	
+	function SetLocation(json){
+		location = json;
+
+		$('#address').html(location.city + ', '+ location.region_name + ' ' + location.country_name);
+		if( location !== 'undefined' ){
+			GetForcastData(location);
+		}else{
+			$('#address').html("Error fetching your Forcast");
+			$('#current').hide();
+			$('#daily').hide();	
+		}
+	}
 	function GetForcastData(location){
 		var urlPath = 'https://api.forecast.io/forecast/' + forcastKey+ '/' + location.latitude +',' + location.longitude + '';
 		 $.ajax({
@@ -53,28 +76,7 @@ $(document).ready(function () {
 			$('#daily').hide();		
 	}
 	
-	function SetIPData(json){
-		currentIP = json.ip;
-		if( currentIP !== 'undefined' ){
-			GetGeoData(currentIP);
-		}else{
-			$('#address').html("Error fetching your IP");
-			$('#current').hide();
-			$('#daily').hide();	
-		}
-	}
-	function SetLocation(json){
-		location = json;
 
-		$('#address').html(location.city + ', '+ location.region_name + ' ' + location.country_name);
-		if( location !== 'undefined' ){
-			GetForcastData(location);
-		}else{
-			$('#address').html("Error fetching your Forcast");
-			$('#current').hide();
-			$('#daily').hide();	
-		}
-	}
 
 	GetIPData();
 });
