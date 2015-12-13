@@ -1,0 +1,129 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>Super Weather</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+    <!-- build:js scripts/vendor/modernizr.js -->
+    <script src="bower_components/modernizr/modernizr.js"></script>
+    <!-- endbuild -->
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="container">
+      <div class="header">
+        <h3 class="text-muted">Super Weather Forcast Getter</h3>
+      </div>
+
+      <div class="jumbotron">
+        <p id="address">Fetching your address&nbsp;<i class="fa fa-spinner fa-pulse"></i></p>
+        <div id="current"><i class="fa fa-spinner fa-pulse"></i></div>
+        <script id="current-tmpl" type="text/x-handlebars-template">
+
+            <i class="wi {{iconClass forcast.currently.icon}} main-icon"></i>
+            <p>{{forcast.currently.summary}}, {{forcast.currently.temperature}} <i class="wi wi-celsius"></i></p>
+            <p class="wind">Wind&nbsp;{{degToDirection forcast.currently.windBearing}} {{forcast.currently.windSpeed}}&nbsp;km/h</p>
+
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                {{#each forcast.daily.data}}
+                  {{#if @first}}
+                      <div class="col-sm-4">
+                        <div class="pull-left"><i class="fa fa-angle-up pull-right"></i></div>
+                        <div class="pull-left">&nbsp;{{temperatureMax}}&nbsp;<i class="wi wi-celsius"></i></div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="pull-left"><i class="fa fa-angle-down pull-right"></i></div>
+                        <div class="pull-left">&nbsp;{{temperatureMin}}&nbsp;<i class="wi wi-celsius"></i></div>
+                      </div>
+                      <div class="col-sm-4">
+                          <div class="pull-left"><i class="wi wi-raindrops"></i></div>
+                          <div class="pull-left">&nbsp;{{average precipProbability}}&nbsp;%</div>
+                      </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <p class="summary">{{summary}}</p>
+                  {{/if}}
+                {{/each}}
+            </div>
+        </script>
+      </div>
+
+      <div class="row marketing">
+        <div class="col-lg-12">
+          
+           <div id="daily"><i class="fa fa-spinner fa-pulse"></i></div>
+              <script id="daily-tmpl" type="text/x-handlebars-template">
+                <div><h3>Future-cast</h3></div>
+                 <ul class="daily-list">
+              {{#each dailyForcast.daily.data}}
+                 <li class="daily-list-item">
+                   <div>
+                     <p>{{dateFormat time}}</p>
+                    <p><i class="fa fa-angle-up pull-left"></i>&nbsp;{{temperatureMax}} <i class="wi wi-celsius"></i></p>
+                    <p><i class="fa fa-angle-down pull-left"></i>{{temperatureMin}} <i class="wi wi-celsius"></i></p>
+                    <p><i class="wi {{iconClass icon}}"></i>{{precipType}}&nbsp;{{average precipProbability}}%</p>
+                     <p>{{degToDirection windBearing}}&nbsp;{{windSpeed}} km/h</p>
+                   </div>
+                 </li>
+                {{/each}}
+                 </ul>
+              </script>
+        </div>
+      </div>
+
+      <div class="footer">
+       
+      </div>
+
+    </div>
+
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/affix.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/alert.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/button.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/carousel.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/collapse.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/dropdown.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tab.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/transition.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/scrollspy.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/modal.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/tooltip.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap/popover.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/handlebars/handlebars.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <script>
+      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='//www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-XXXXX-X');ga('send','pageview');
+    </script>
+
+        <!-- build:js({app,.tmp}) scripts/main.js -->
+        <script src="scripts/main.js"></script>
+        <!-- endbuild -->
+</body>
+</html>
