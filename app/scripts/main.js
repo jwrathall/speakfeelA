@@ -1,4 +1,4 @@
- //'use strict';	
+ 'use strict';	
 $(document).ready(function () {
 	var forcastKey = 'b5304902651cd612cd747cb5256a1831';
 	var currentIP;
@@ -35,7 +35,6 @@ $(document).ready(function () {
 	}
 	
 	function ShowForcast(response){
-		console.log(response);
 		//current
 		var source   = $("#current-tmpl").html();
 		var template = Handlebars.compile(source);
@@ -45,15 +44,13 @@ $(document).ready(function () {
 		
 		var data = response;
 		$('#current').html(template({forcast:data}));
-		
 		$('#daily').html(dailytemplate({dailyForcast:data}));
 	}
 	
 	function ShowError(){
-		var errorSource   = $("#error-tmpl").html();
-		var errorTemplate = Handlebars.compile(errorSource);
-		$('#error').html(errorTemplate);
-		
+			$('#address').html("Error fetching your weather");
+			$('#current').hide();
+			$('#daily').hide();		
 	}
 	
 	function SetIPData(json){
@@ -78,8 +75,7 @@ $(document).ready(function () {
 			$('#daily').hide();	
 		}
 	}
-	
-	
+
 	GetIPData();
 });
 
@@ -101,7 +97,6 @@ Handlebars.registerHelper("degToDirection",function(windBearing){
 });
 Handlebars.registerHelper("iconClass",function(icon){
 	var returnIcon;
-	console.log(icon);
 	switch(icon){
 		case "day-sunny":
 			returnIcon = 'wi-forecast-io-clear-day';
@@ -140,7 +135,6 @@ Handlebars.registerHelper("iconClass",function(icon){
 			returnIcon = 'wi-no-icon';
 		
 	}
-	console.log(returnIcon);
 	return returnIcon;
 });
 
