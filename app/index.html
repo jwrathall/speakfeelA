@@ -53,9 +53,9 @@
                           <div class="pull-left"><i class="wi wi-raindrops"></i></div>
                           <div class="pull-left">&nbsp;{{average precipProbability}}&nbsp;%</div>
                       </div>
-            </div>
-            <div class="col-lg-12 col-md-12 col-sm-12">
-              <p class="summary">{{summary}}</p>
+                  </div>
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <p class="summary">{{summary}}</p>
                   {{/if}}
                 {{/each}}
             </div>
@@ -64,22 +64,21 @@
 
       <div class="row marketing">
         <div class="col-lg-12">
-          
            <div id="daily"><i class="fa fa-spinner fa-pulse"></i></div>
               <script id="daily-tmpl" type="text/x-handlebars-template">
                 <div><h3>Future-cast</h3></div>
                  <ul class="daily-list">
-              {{#each dailyForcast.daily.data}}
-                 <li class="daily-list-item">
-                   <div>
-                     <p>{{dateFormat time}}</p>
-                    <p><i class="fa fa-angle-up pull-left"></i>&nbsp;{{temperatureMax}} <i class="wi wi-celsius"></i></p>
-                    <p><i class="fa fa-angle-down pull-left"></i>&nbsp;{{temperatureMin}} <i class="wi wi-celsius"></i></p>
-                    <p><i class="wi {{iconClass icon}}"></i>{{precipType}}&nbsp;{{average precipProbability}}%</p>
-                     <p>{{degToDirection windBearing}}&nbsp;{{windSpeed}} km/h</p>
-                   </div>
-                 </li>
-                {{/each}}
+                    {{#each dailyForcast.daily.data}}
+                       <li class="daily-list-item">
+                         <div>
+                           <p>{{dateFormat time}}</p>
+                          <p><i class="fa fa-angle-up pull-left"></i>&nbsp;{{temperatureMax}} <i class="wi wi-celsius"></i></p>
+                          <p><i class="fa fa-angle-down pull-left"></i>&nbsp;{{temperatureMin}} <i class="wi wi-celsius"></i></p>
+                          <p><i class="wi {{iconClass icon}}"></i>{{precipType}}&nbsp;{{average precipProbability}}%</p>
+                           <p>{{degToDirection windBearing}}&nbsp;{{windSpeed}} km/h</p>
+                         </div>
+                       </li>
+                      {{/each}}
                  </ul>
               </script>
         </div>
